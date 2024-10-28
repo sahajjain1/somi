@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -104,17 +104,62 @@ const ProductDetails = () => {
   );
 };
 
-const Contact = () => (
-  <div className="contact">
-    <h1>Contact Us</h1>
-    <form>
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-      <textarea placeholder="Message"></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </div>
-);
+// Contact component with Address Information
+const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Construct the mailto link
+    const subject = `Contact from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const mailtoLink = `mailto:gtc.operations@yahoo.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    // Open the mailto link
+    window.location.href = mailtoLink;
+  };
+
+  return (
+    <div className="contact">
+      <h1>Contact Us</h1>
+      <div className="contact-address">
+        <h2>Head Office:</h2>
+        <p>Gopal Trading Company</p>
+        <p>Akodiya Sarangpur Road, Near Police Station</p>
+        <p>Tehsil: Shujalpur</p>
+        <p>District: Shajapur - 465223 M. P. India</p>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+        ></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  );
+};
 
 const App = () => {
   return (
