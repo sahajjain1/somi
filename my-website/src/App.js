@@ -44,7 +44,7 @@ const products = [
 
 const Footer = () => (
   <footer>
-    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    <p>&copy; Gopal trading Company 2024. All rights reserved.</p>
   </footer>
 );
 
