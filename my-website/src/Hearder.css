@@ -108,9 +108,7 @@
     .hamburger {
       display: flex;
     }
-    .navbar{
-        width: 82%;
-    }
+
   
     .nav-menu {
       position: fixed;

@@ -7,6 +7,20 @@
   --card-background: #ffffff;
   --header-height: 70px;
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0; /* Remove any body padding */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
 
 @keyframes fadeIn {
   from {
