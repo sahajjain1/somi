@@ -68,7 +68,7 @@ const Home = () => {
       <section className="product-section">
         <h2>Chakki Atta</h2>
         <p>
-        ARI GOLD M.P. Chakki Atta is crafted from the finest quality wheat, ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method, removing all dust and impurities under controlled conditions. We utilize a slow grinding process that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
+        PARI GOLD M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method, We utilize a slow grinding process that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
         <div className="product-grid">
           {attaProducts.map((product) => (
             <ProductCard key={product.id} product={product} />

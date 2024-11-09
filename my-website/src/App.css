@@ -276,7 +276,7 @@ button[type="submit"]:hover {
   }
 
   main {
-    padding-top: calc(4rem + var(--header-height));
+    padding-top: calc(3rem + var(--header-height));
   }
 }
 /* Add to your App.css */
