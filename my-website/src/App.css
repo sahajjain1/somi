@@ -1,11 +1,11 @@
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --background-color: #f0f3f5;
+  --primary-color: #ff6f61;
+  --secondary-color: #ffe564;
+  --background-color: #f5f7fa;
   --text-color: #2c3e50;
-  --accent-color: #e74c3c;
+  --accent-color: #4a90e2;
   --card-background: #ffffff;
-  --header-height: 60px;
+  --header-height: 70px;
 }
 
 @keyframes fadeIn {
@@ -29,13 +29,10 @@
 }
 
 body {
-  font-family: "Roboto", Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
+  font-family: "Poppins", sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease;
+  margin: 0;
 }
 
 .app {
@@ -45,17 +42,107 @@ body {
   animation: fadeIn 0.5s ease-out;
 }
 
+
 header {
-  background-color: var(--primary-color);
-  padding: 0 2rem;
-  position: fixed;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.product-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.product-section p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+
+.product-card {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.product-image-container {
   width: 100%;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-card h3 {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 0.5rem 0;
+}
+
+.product-card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+button.add-to-cart {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.add-to-cart:hover {
+  background-color: var(--accent-color);
+}
+
+.contact form input,
+.contact form textarea {
+  font-family: inherit;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+footer {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 }
 
 nav ul {
@@ -113,129 +200,6 @@ h2,
 h3 {
   color: var(--primary-color);
   margin-bottom: 1rem;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-.product-card {
-  background-color: var(--card-background);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.product-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover img {
-  transform: scale(1.05);
-}
-
-.product-card h3 {
-  font-size: 1.2rem;
-  margin: 1rem;
-  color: var(--text-color);
-}
-
-.product-card p {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0 1rem 1rem;
-}
-
-.product-card .price {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--accent-color);
-  margin: 0 1rem;
-}
-
-.product-card .view-button {
-  display: block;
-  text-align: center;
-  background-color: var(--secondary-color);
-  color: white;
-  text-decoration: none;
-  padding: 0.75rem;
-  margin: 1rem;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  transform: translateY(0);
-}
-
-.product-card .view-button:hover {
-  background-color: #27ae60;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-}
-
-.product-details {
-  background-color: var(--card-background);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-out;
-}
-
-.product-details img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.product-details .price {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--accent-color);
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.product-details .add-to-cart {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.product-details .add-to-cart:hover {
-  background-color: #27ae60;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
 }
 
 form {
@@ -301,207 +265,6 @@ button[type="submit"]:hover {
     padding-top: calc(4rem + var(--header-height));
   }
 }
-
-/* Add these styles to your App.css */
-.navbar {
-  background: linear-gradient(135deg, #1a1a1a, #2c3e50);
-  padding: 0.5rem 2rem;
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative;
-  overflow: hidden;
-}
-
-.logo::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background: #3498db;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-
-.logo:hover::before {
-  transform: translateX(0);
-}
-
-.nav-menu {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.nav-link::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  bottom: -5px;
-  left: 0;
-  background: #3498db;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #3498db;
-}
-
-.nav-link:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.nav-link.active::before {
-  transform: scaleX(1);
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 1001;
-}
-
-.hamburger span {
-  display: block;
-  width: 25px;
-  height: 2px;
-  background: #fff;
-  transition: all 0.3s ease;
-}
-
-/* Mobile menu styles */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 300px;
-    height: 100vh;
-    background: linear-gradient(135deg, #1a1a1a, #2c3e50);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .nav-item {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-
-  .nav-menu.active .nav-item {
-    opacity: 1;
-    transform: translateX(0);
-    transition: all 0.5s ease;
-  }
-
-  .nav-menu.active .nav-item:nth-child(1) {
-    transition-delay: 0.1s;
-  }
-  .nav-menu.active .nav-item:nth-child(2) {
-    transition-delay: 0.2s;
-  }
-  .nav-menu.active .nav-item:nth-child(3) {
-    transition-delay: 0.3s;
-  }
-  .nav-menu.active .nav-item:nth-child(4) {
-    transition-delay: 0.4s;
-  }
-}
-
-/* Cool hover effect for mobile menu */
-@media (max-width: 768px) {
-  .nav-link:hover {
-    text-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
-  }
-}
-
-/* Optional: Add a backdrop when mobile menu is open */
-.backdrop {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.backdrop.active {
-  display: block;
-  opacity: 1;
-}
-
 /* Add to your App.css */
 .product-grid {
   display: grid;
