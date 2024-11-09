@@ -97,10 +97,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .about {
-    padding: 2rem;
-  }
-
   .about h1 {
     font-size: 1.8rem;
   }
