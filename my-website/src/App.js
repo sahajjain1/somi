@@ -104,7 +104,7 @@ const Contact = () => {
   const address = `
     Head Office :-
     Gopal Trading Company
-    Akodiya Sarangpur Road Near Police Station
+    Akodia Sarangpur Road Near Police Station
     Tehsil :- Shujalpur
     District  :- Shajapur :- 465223 M. P. India
     Contact no. :-  9111981729  `;
