@@ -8,30 +8,27 @@ import Header from "./Header";
 const products = [
   {
     id: 1,
-    name: "Product 1",
-    weight: "1kg",
-    price: 19.99,
+    name: "5 kg",
+    price: 200,
     image: "./product1.jpg",
   },
   {
     id: 2,
-    name: "Product 2",
-    weight: "5kg",
-    price: 29.99,
+    name: "10 kg",
+    price: 390,
     image: "./product2.jpg",
   },
   {
     id: 3,
-    name: "Product 3",
-    weight: "10kg",
-    price: 39.99,
+    name: "Fine Bran",
+    weight: "40 kg",
+    price: 890,
     image: "./product3.jpg",
   },
   {
     id: 4,
-    name: "Product 4",
-    weight: "20kg",
-    price: 49.99,
+    name: "26 kg",
+    price: 936,
     image: "./product4.jpg",
   },
 ];
@@ -49,7 +46,7 @@ const ProductCard = ({ product }) => (
       <img src={product.image} alt={product.name} className="product-image" />
     </div>
     <h3>{product.name} - {product.weight}</h3>
-    <p>Price: ${product.price}</p>
+    <p>Price: {product.price} ₹</p>
   </div>
 );
 
@@ -68,7 +65,7 @@ const Home = () => {
       <section className="product-section">
         <h2>Chakki Atta</h2>
         <p>
-        PARI GOLD M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method, We utilize a slow grinding process that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
+        PARI GOLD M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing methodthat retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
         <div className="product-grid">
           {attaProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -91,53 +88,71 @@ const Home = () => {
       <section className="product-section">
         <About />
       </section>
+       {/* Contact Section */}
+       <section className="contact-section">
+        <Contact />
+      </section>
     </div>
   );
 };
+// Contact.js
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const subject = `Contact from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-    window.location.href = `mailto:gtc.operations@yahoo.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+  const address = `
+    Head Office :-
+    Gopal Trading Company
+    Akodiya Sarangpur Road Near Police Station
+    Tehsil :- Shujalpur
+    District  :- Shajapur :- 465223 M. P. India
+    Contact no. :-  9111981729  `;
+
+  // Handle right-click to show custom context menu
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    setMenuPosition({ x: event.pageX, y: event.pageY });
+    setMenuVisible(true);
+  };
+
+  // Hide context menu on click outside
+  const hideContextMenu = () => {
+    setMenuVisible(false);
+  };
+
+  // Copy address to clipboard
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(address);
+    alert('Address copied to clipboard!');
+    hideContextMenu();
   };
 
   return (
-    <div className="contact">
+    <div className="contact" onClick={hideContextMenu}>
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-        ></textarea>
-        <button type="submit">Send</button>
-      </form>
+      <div className="contact-address" onContextMenu={handleContextMenu}>
+        <p>Head Office :-</p>
+        <p>Gopal Trading Company</p>
+        <p>Akodiya Sarangpur Road Near Police Station</p>
+        <p>Tehsil :- Shujalpur</p>
+        <p>District :- Shajapur :- 465223 M. P. India</p>
+      </div>
+
+      {menuVisible && (
+        <div
+          className="context-menu"
+          style={{ top: menuPosition.y, left: menuPosition.x }}
+        >
+          <button onClick={copyToClipboard}>Copy Address</button>
+          <button onClick={() => alert('Get Directions')}>Get Directions</button>
+        </div>
+      )}
     </div>
   );
 };
+;
+
 
 const App = () => (
   <Router>
