@@ -64,6 +64,40 @@ body {
   animation: fadeIn 0.5s ease-out;
 }
 
+/* Add these new animations at the top of your CSS file */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
 /* Hero Section */
 .hero-section {
   background: var(--gradient-primary);
@@ -75,6 +109,7 @@ body {
   padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .hero-section::before {
@@ -86,6 +121,11 @@ body {
   bottom: 0;
   background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.1)"/></svg>');
   opacity: 0.1;
+}
+
+.hero-section.scrolled {
+  background: var(--gradient-primary);
+  box-shadow: var(--shadow-lg);
 }
 
 .hero-content {
@@ -117,11 +157,46 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.button-icon {
+  display: inline-block;
+  margin-left: 8px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-secondary);
+  margin: 1rem auto;
+  border-radius: 3px;
+  animation: pulse 2s infinite;
+}
+
+.animate-text {
+  animation: slideInLeft 1s ease-out;
+}
+
+.animate-text-delay {
+  animation: slideInRight 1s ease-out 0.3s both;
+}
+
+.animate-button {
+  animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 /* Product Section */
@@ -174,11 +249,28 @@ body {
   box-shadow: var(--shadow-md);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  overflow: hidden;
 }
 
 .product-card:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-lg);
+}
+
+.product-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover::after {
+  transform: translateX(100%);
 }
 
 .product-badge {
@@ -192,6 +284,7 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   z-index: 1;
+  animation: pulse 2s infinite;
 }
 
 .product-image-container {
@@ -235,10 +328,24 @@ body {
   cursor: pointer;
   transform: translateY(20px);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.product-card:hover .quick-view-button {
-  transform: translateY(0);
+.quick-view-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.quick-view-button:hover::after {
+  transform: translateX(100%);
 }
 
 .product-content {
@@ -269,6 +376,25 @@ body {
   padding: 0.3rem 0.8rem;
   border-radius: 50px;
   font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.feature-tag:hover::before {
+  opacity: 0.1;
 }
 
 .product-price {
@@ -327,6 +453,8 @@ body {
   background: white;
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .feature-card:hover {
@@ -334,14 +462,46 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.feature-card:hover::before {
+  opacity: 0.1;
+}
+
 .feature-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
 }
 
 .feature-card h3 {
   color: var(--primary-color);
   margin-bottom: 0.5rem;
+}
+
+.animate-feature {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-feature-delay-1 {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.animate-feature-delay-2 {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
 }
 
 /* Contact Section */
@@ -482,6 +642,14 @@ body {
   .footer-content {
     gap: 2rem;
   }
+
+  .hero-waves svg {
+    height: 100px;
+  }
+
+  .section-divider {
+    width: 40px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -500,4 +668,30 @@ body {
   .product-actions {
     flex-direction: column;
   }
+
+  .hero-waves svg {
+    height: 50px;
+  }
+
+  .button-icon {
+    display: none;
+  }
+}
+
+.hero-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.hero-waves svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+  animation: wave 10s linear infinite;
 }

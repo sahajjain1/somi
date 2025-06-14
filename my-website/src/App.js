@@ -1,5 +1,5 @@
 // App.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./About";
@@ -88,62 +88,90 @@ const ProductCard = ({ product }) => (
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const productsRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToProducts = () => {
+    productsRef.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
 
   const attaProducts = products.filter((product) => product.id !== 3);
   const fineBranProduct = products.find((product) => product.id === 3);
 
   return (
     <div className="home-container">
-      <section className="hero-section">
+      <section className={`hero-section ${isScrolled ? 'scrolled' : ''}`}>
         <div className="hero-content">
-          <h1 className="hero-title">Welcome to Gopal Trading Company</h1>
-          <p className="hero-subtitle">Your Trusted Partner in Quality Products</p>
-          <button className="cta-button">Explore Products</button>
+          <h1 className="hero-title animate-text">Welcome to Gopal Trading Company</h1>
+          <p className="hero-subtitle animate-text-delay">Your Trusted Partner in Quality Products</p>
+          <button className="cta-button animate-button" onClick={scrollToProducts}>
+            Explore Products
+            <span className="button-icon">↓</span>
+          </button>
+        </div>
+        <div className="hero-waves">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
         </div>
       </section>
 
-      <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
-        <div className="section-header">
-          <h2>Chakki Atta</h2>
-          <p className="section-description">
-            PARI PERFECT M.P. Chakki Atta is crafted from the finest quality wheat, ensuring you get a product that's as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss.
-          </p>
-        </div>
-        <div className="product-grid">
-          {attaProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+      <div ref={productsRef}>
+        <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
+          <div className="section-header">
+            <h2 className="section-title">Chakki Atta</h2>
+            <div className="section-divider"></div>
+            <p className="section-description">
+              PARI PERFECT M.P. Chakki Atta is crafted from the finest quality wheat, ensuring you get a product that's as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss.
+            </p>
+          </div>
+          <div className="product-grid">
+            {attaProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
 
-      <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
-        <div className="section-header">
-          <h2>Fine Bran</h2>
-          <p className="section-description">
-            Pari Perfect Fine Bran is beneficial feed for cattle, with high fiber content that helps improve digestion. It enhances coat condition, builds muscle mass, improves metabolism, and provides energy.
-          </p>
-        </div>
-        <div className="product-grid">
-          <ProductCard product={fineBranProduct} />
-        </div>
-      </section>
+        <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
+          <div className="section-header">
+            <h2 className="section-title">Fine Bran</h2>
+            <div className="section-divider"></div>
+            <p className="section-description">
+              Pari GOLD Fine Bran is beneficial feed for cattle, with high fiber content that helps improve digestion. It enhances coat condition, builds muscle mass, improves metabolism, and provides energy.
+            </p>
+          </div>
+          <div className="product-grid">
+            <ProductCard product={fineBranProduct} />
+          </div>
+        </section>
+      </div>
 
       <section className="features-section">
-        <div className="feature-card">
+        <div className="feature-card animate-feature">
           <i className="feature-icon">🚚</i>
           <h3>Fast Delivery</h3>
           <p>Quick and reliable delivery service</p>
         </div>
-        <div className="feature-card">
+        <div className="feature-card animate-feature-delay-1">
           <i className="feature-icon">⭐</i>
           <h3>Quality Assured</h3>
           <p>Premium quality products</p>
         </div>
-        <div className="feature-card">
+        <div className="feature-card animate-feature-delay-2">
           <i className="feature-icon">💯</i>
           <h3>100% Natural</h3>
           <p>Pure and natural ingredients</p>
