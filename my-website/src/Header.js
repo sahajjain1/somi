@@ -25,7 +25,7 @@ const Header = () => {
     <>
       <header className="navbar">
         <div className="nav-container">
-          <Link to="/" className="logo">Pari Gold</Link>
+          <Link to="/" className="logo">Pari Perfect </Link>
 
           <button
             className={`hamburger ${isOpen ? 'active' : ''}`}

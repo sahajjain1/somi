@@ -25,12 +25,6 @@ const products = [
     price: 890,
     image: "./product3.jpg",
   },
-  {
-    id: 4,
-    name: "26 kg",
-    price: 936,
-    image: "./product4.jpg",
-  },
 ];
 
 const Footer = () => (
@@ -65,7 +59,7 @@ const Home = () => {
       <section className="product-section">
         <h2>Chakki Atta</h2>
         <p>
-        PARI GOLD M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing methodthat retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
+        PARI PERFECT  M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing methodthat retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
         <div className="product-grid">
           {attaProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -77,7 +71,7 @@ const Home = () => {
       <section className="product-section">
         <h2>Fine Bran</h2>
         <p>
-          Pari Gold Fine Bran is beneficial feed for cattle, with high fiber
+          Pari Perfect  Fine Bran is beneficial feed for cattle, with high fiber
           content that helps improve digestion. It enhances coat condition,
           builds muscle mass, improves metabolism, and provides energy.
         </p>
