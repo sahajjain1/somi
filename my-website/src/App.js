@@ -8,18 +8,18 @@ import Header from "./Header";
 const products = [
   {
     id: 1,
-    name: "5 kg",
+    name: "500 g",
     price: 50,
     image: "./product1.jpg",
-    description: "Premium quality 5kg pack",
-    features: ["Pure Wheat", "Rich in Fiber", "No Preservatives"]
+    description: "Premium quality 500 G pack",
+    features: ["Rich in Fiber", "No Preservatives"]
   },
   {
     id: 2,
-    name: "10 kg",
+    name: "5 kg",
     price: 200,
     image: "./product2.jpg",
-    description: "Family size 10kg pack",
+    description: "Family size 5kg pack",
     features: ["Pure Wheat", "Rich in Fiber", "No Preservatives"]
   },
   {
