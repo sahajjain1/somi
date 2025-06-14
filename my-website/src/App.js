@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./About";
@@ -9,14 +9,18 @@ const products = [
   {
     id: 1,
     name: "5 kg",
-    price: 200,
+    price: 50,
     image: "./product1.jpg",
+    description: "Premium quality 5kg pack",
+    features: ["Pure Wheat", "Rich in Fiber", "No Preservatives"]
   },
   {
     id: 2,
     name: "10 kg",
-    price: 390,
+    price: 200,
     image: "./product2.jpg",
+    description: "Family size 10kg pack",
+    features: ["Pure Wheat", "Rich in Fiber", "No Preservatives"]
   },
   {
     id: 3,
@@ -24,42 +28,91 @@ const products = [
     weight: "40 kg",
     price: 890,
     image: "./product3.jpg",
+    description: "Premium cattle feed",
+    features: ["High Fiber", "Rich in Nutrients", "Improves Digestion"]
   },
 ];
 
 const Footer = () => (
-  <footer>
-    <p>&copy; Gopal Trading Company 2024. All rights reserved.</p>
+  <footer className="footer">
+    <div className="footer-content">
+      <div className="footer-section">
+        <h3>Gopal Trading Company</h3>
+        <p>Your trusted partner in quality products</p>
+      </div>
+      <div className="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div className="footer-section">
+        <h3>Contact Info</h3>
+        <p>Phone: 9111981729</p>
+        <p>Email: info@gopaltrading.com</p>
+      </div>
+    </div>
+    <div className="footer-bottom">
+      <p>&copy; Gopal Trading Company 2024. All rights reserved.</p>
+    </div>
   </footer>
 );
 
-// App.js (Updated ProductCard component)
 const ProductCard = ({ product }) => (
   <div className="product-card">
+    <div className="product-badge">Best Seller</div>
     <div className="product-image-container">
       <img src={product.image} alt={product.name} className="product-image" />
+      <div className="product-overlay">
+        <button className="quick-view-button">Quick View</button>
+      </div>
     </div>
-    <h3>{product.name} - {product.weight}</h3>
-    <p>Price: {product.price} ₹</p>
+    <div className="product-content">
+      <h3 className="product-title">{product.name} {product.weight && `- ${product.weight}`}</h3>
+      <p className="product-description">{product.description}</p>
+      <div className="product-features">
+        {product.features.map((feature, index) => (
+          <span key={index} className="feature-tag">{feature}</span>
+        ))}
+      </div>
+      <div className="product-price">₹{product.price}</div>
+      <div className="product-actions">
+        <button className="add-to-cart">Add to Cart</button>
+        <button className="view-button">View Details</button>
+      </div>
+    </div>
   </div>
 );
 
-// App.js (Updated Home Component)
 const Home = () => {
-  // Separate products into two categories
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const attaProducts = products.filter((product) => product.id !== 3);
   const fineBranProduct = products.find((product) => product.id === 3);
 
   return (
-    <div >
-      <h1>Welcome to Our Store</h1>
-      <p>Explore our selection of high-quality products:</p>
+    <div className="home-container">
+      <section className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">Welcome to Gopal Trading Company</h1>
+          <p className="hero-subtitle">Your Trusted Partner in Quality Products</p>
+          <button className="cta-button">Explore Products</button>
+        </div>
+      </section>
 
-      {/* Chakki Atta Section */}
-      <section className="product-section">
-        <h2>Chakki Atta</h2>
-        <p>
-        PARI PERFECT  M.P. Chakki Atta is crafted from the finest quality wheat,ensuring you get a product that’s as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing methodthat retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss. </p>
+      <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
+        <div className="section-header">
+          <h2>Chakki Atta</h2>
+          <p className="section-description">
+            PARI PERFECT M.P. Chakki Atta is crafted from the finest quality wheat, ensuring you get a product that's as pure and wholesome as homemade. Our wheat undergoes a meticulous and hygienic processing method that retains essential nutrients, including vital minerals, vitamins, proteins, and natural fiber, ensuring no nutritional loss.
+          </p>
+        </div>
         <div className="product-grid">
           {attaProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -67,29 +120,46 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Fine Bran Section */}
-      <section className="product-section">
-        <h2>Fine Bran</h2>
-        <p>
-          Pari Perfect  Fine Bran is beneficial feed for cattle, with high fiber
-          content that helps improve digestion. It enhances coat condition,
-          builds muscle mass, improves metabolism, and provides energy.
-        </p>
+      <section className={`product-section ${isVisible ? 'fade-in' : ''}`}>
+        <div className="section-header">
+          <h2>Fine Bran</h2>
+          <p className="section-description">
+            Pari Perfect Fine Bran is beneficial feed for cattle, with high fiber content that helps improve digestion. It enhances coat condition, builds muscle mass, improves metabolism, and provides energy.
+          </p>
+        </div>
         <div className="product-grid">
           <ProductCard product={fineBranProduct} />
         </div>
       </section>
-      <section className="product-section">
+
+      <section className="features-section">
+        <div className="feature-card">
+          <i className="feature-icon">🚚</i>
+          <h3>Fast Delivery</h3>
+          <p>Quick and reliable delivery service</p>
+        </div>
+        <div className="feature-card">
+          <i className="feature-icon">⭐</i>
+          <h3>Quality Assured</h3>
+          <p>Premium quality products</p>
+        </div>
+        <div className="feature-card">
+          <i className="feature-icon">💯</i>
+          <h3>100% Natural</h3>
+          <p>Pure and natural ingredients</p>
+        </div>
+      </section>
+
+      <section className="about-preview">
         <About />
       </section>
-       {/* Contact Section */}
-       <section className="contact-section">
+
+      <section className="contact-section">
         <Contact />
       </section>
     </div>
   );
 };
-// Contact.js
 
 const Contact = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -103,19 +173,16 @@ const Contact = () => {
     District  :- Shajapur :- 465223 M. P. India
     Contact no. :-  9111981729  `;
 
-  // Handle right-click to show custom context menu
   const handleContextMenu = (event) => {
     event.preventDefault();
     setMenuPosition({ x: event.pageX, y: event.pageY });
     setMenuVisible(true);
   };
 
-  // Hide context menu on click outside
   const hideContextMenu = () => {
     setMenuVisible(false);
   };
 
-  // Copy address to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(address);
     alert('Address copied to clipboard!');
@@ -124,13 +191,34 @@ const Contact = () => {
 
   return (
     <div className="contact" onClick={hideContextMenu}>
-      <h1>Contact Us</h1>
-      <div className="contact-address" onContextMenu={handleContextMenu}>
-        <p>Head Office :-</p>
-        <p>Gopal Trading Company</p>
-        <p>Akodiya Sarangpur Road Near Police Station</p>
-        <p>Tehsil :- Shujalpur</p>
-        <p>District :- Shajapur :- 465223 M. P. India</p>
+      <div className="contact-container">
+        <h1>Contact Us</h1>
+        <div className="contact-grid">
+          <div className="contact-info">
+            <div className="contact-address" onContextMenu={handleContextMenu}>
+              <h3>Our Location</h3>
+              <p>Head Office :-</p>
+              <p>Gopal Trading Company</p>
+              <p>Akodiya Sarangpur Road Near Police Station</p>
+              <p>Tehsil :- Shujalpur</p>
+              <p>District :- Shajapur :- 465223 M. P. India</p>
+            </div>
+            <div className="contact-details">
+              <h3>Get in Touch</h3>
+              <p>📞 Phone: 9111981729</p>
+              <p>✉️ Email: info@gopaltrading.com</p>
+            </div>
+          </div>
+          <div className="contact-form">
+            <h3>Send us a Message</h3>
+            <form>
+              <input type="text" placeholder="Your Name" required />
+              <input type="email" placeholder="Your Email" required />
+              <textarea placeholder="Your Message" required></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
       </div>
 
       {menuVisible && (
@@ -145,8 +233,6 @@ const Contact = () => {
     </div>
   );
 };
-;
-
 
 const App = () => (
   <Router>
